@@ -17,6 +17,14 @@ Get 30% off on your dedicated server using affiliate code SILKLESS:
 
 [![Nodecraft banner](./Media/nodecraft.jpg)](https://nodecraft.com/r/silkless)
 
+## 编译前
+
+```shell
+cp SilksongPath.props.example SilksongPath.props
+```
+
+然后编辑其中的路径为丝之歌的游戏路径.
+
 ## Screenshots / Videos
 
 <details>

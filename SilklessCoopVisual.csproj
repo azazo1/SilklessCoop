@@ -15,6 +15,8 @@
         <RootNamespace>SilklessCoopVisual</RootNamespace>
     </PropertyGroup>
 
+    <Import Condition="Exists('SilksongPath.props')" Project="SilksongPath.props" />
+
     <ItemGroup>
         <PackageReference Include="BepInEx.Analyzers" Version="1.*" PrivateAssets="all" />
         <PackageReference Include="BepInEx.Core" Version="5.*" />
@@ -41,13 +43,13 @@
 
         <ProjectReference Include="../SilklessLib/SilklessLib.csproj" />
     </ItemGroup>
-	
+
     <ItemGroup Condition="'$(TargetFramework.TrimEnd(`0123456789`))' == 'net'">
         <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.2" PrivateAssets="all" />
     </ItemGroup>
 
     <Target Name="MoveFiles" AfterTargets="Build">
         <Exec Command="copy &quot;$(OutputPath)SilklessCoopVisual.dll&quot; &quot;$(SILKSONG_PATH)/BepInEx/plugins&quot;" />
-        <Exec Command="copy &quot;$(OutputPath)SilklessCoopVisual.dll&quot; &quot;$(SILKLESS_OUTPUT)/BepInEx/plugins&quot;" />
+<!--        <Exec Command="copy &quot;$(OutputPath)SilklessCoopVisual.dll&quot; &quot;$(SILKLESS_OUTPUT)/BepInEx/plugins&quot;" />-->
     </Target>
 </Project>
