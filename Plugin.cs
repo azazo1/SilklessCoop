@@ -26,14 +26,14 @@ public class Plugin : BaseUnityPlugin
 
         // read mod config from file
         ModConfig.Bind(Config);
-        
+
         // set up api
         if (!SilklessAPI.Init(Logger))
         {
             LogUtil.LogError("SilklessAPI failed to initialize!");
             return;
         }
-        
+
         // check versions
         SilklessAPI.OnPlayerJoin += _ => SilklessAPI.SendPacket(new ModVersionPacket {Version = MyPluginInfo.PLUGIN_VERSION});
         SilklessAPI.AddHandler<ModVersionPacket>(packet =>
@@ -43,20 +43,20 @@ public class Plugin : BaseUnityPlugin
                 LogUtil.LogInfo($"Version {MyPluginInfo.PLUGIN_VERSION} matched.", true);
                 return;
             }
-            
+
             LogUtil.LogInfo($"Version mismatch! You: {MyPluginInfo.PLUGIN_VERSION}, {packet.ID}: {packet.Version}", true);
             SilklessAPI.Disable();
         });
 
         // patch
         new Harmony("com.nek5.silklesscoopvisual").PatchAll();
-        
+
         // set up menu button and popups
         gameObject.AddComponent<UIAdder>();
-        
+
         Canvas cv = gameObject.AddComponent<Canvas>();
         cv.renderMode = RenderMode.ScreenSpaceCamera;
-        
+
         PopupManager pm = gameObject.AddComponent<PopupManager>();
         LogUtil.OnPopupDebug += s => pm.SpawnPopup(s, Color.gray);
         LogUtil.OnPopupInfo += s => pm.SpawnPopup(s);
@@ -72,7 +72,7 @@ public class Plugin : BaseUnityPlugin
     private void OnDestroy()
     {
         foreach (Sync s in gameObject.GetComponents<Sync>()) Destroy(s);
-        
+
         new Harmony("com.nek5.silklesscoopvisual").UnpatchSelf();
     }
 

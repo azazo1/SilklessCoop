@@ -11,23 +11,23 @@ public class PlayerCountSync : Sync
     public GameObject cachedMap;
     public GameObject cachedMainQuests;
     public GameObject cachedCompassIcon;
-    
+
     // others
     private readonly Stack<GameObject> _playerCountPins = new();
 
     protected override void OnEnable()
     {
-        
+
     }
 
     protected override void OnDisable()
     {
-        
+
     }
 
     protected override void OnPlayerJoin(string id)
     {
-        
+
     }
 
     protected override void OnPlayerLeave(string id)
@@ -40,7 +40,7 @@ public class PlayerCountSync : Sync
         try
         {
             base.Update();
-        
+
             if (!cachedMap) cachedMap = GameObject.Find("Game_Map_Hornet");
             if (!cachedMap) cachedMap = GameObject.Find("Game_Map_Hornet(Clone)");
             if (cachedMap && !cachedMainQuests) cachedMainQuests = cachedMap.transform.Find("Main Quest Pins")?.gameObject;
@@ -51,7 +51,7 @@ public class PlayerCountSync : Sync
             LogUtil.LogError(e);
         }
     }
-    
+
     protected override void Tick()
     {
         try
@@ -65,16 +65,16 @@ public class PlayerCountSync : Sync
                 pin.name = "SilklessPlayerCount";
                 pin.transform.position = new Vector3(-14.8f + 0.6f * SilklessAPI.PlayerIDs.Count, -8.2f, 0);
                 pin.transform.localScale = new Vector3(0.6f, 0.6f, 1);
-                
+
                 LogUtil.LogDebug($"Created player count pin {_playerCountPins.Count}");
-                
+
                 _playerCountPins.Push(pin);
             }
 
             while (_playerCountPins.Count > SilklessAPI.PlayerIDs.Count && _playerCountPins.Count > 0)
             {
                 Destroy(_playerCountPins.Pop());
-                
+
                 LogUtil.LogDebug($"Deleted player count pin {_playerCountPins.Count + 1}");
             }
 
@@ -82,7 +82,7 @@ public class PlayerCountSync : Sync
             foreach (GameObject pin in _playerCountPins)
             {
                 if (!pin) continue;
-                
+
                 pin.transform.position = new Vector3(-14.8f + 0.6f * (i++), -8.2f, 0);
                 pin.SetActive(cachedMainQuests.activeSelf);
             }

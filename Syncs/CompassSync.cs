@@ -23,7 +23,7 @@ public class CompassSync : Sync
 
     // others
     public readonly Dictionary<string, GameObject> PlayerCompasses = new();
-    
+
     protected override void OnEnable()
     {
         SilklessAPI.AddHandler<CompassPositionPacket>(OnCompassPositionPacket);
@@ -36,7 +36,7 @@ public class CompassSync : Sync
 
     protected override void OnPlayerJoin(string id)
     {
-        
+
     }
 
     protected override void OnPlayerLeave(string id)
@@ -49,7 +49,7 @@ public class CompassSync : Sync
         try
         {
             base.Update();
-        
+
             if (!cachedMap) cachedMap = GameObject.Find("Game_Map_Hornet");
             if (!cachedMap) cachedMap = GameObject.Find("Game_Map_Hornet(Clone)");
             if (cachedMap && !cachedMainQuests) cachedMainQuests = cachedMap.transform.Find("Main Quest Pins")?.gameObject;
@@ -66,7 +66,7 @@ public class CompassSync : Sync
     {
         SendCompassPositionPacket();
     }
-    
+
     protected override void Reset()
     {
         try
@@ -79,7 +79,7 @@ public class CompassSync : Sync
             LogUtil.LogError(e);
         }
     }
-    
+
     // compass position
     private void SendCompassPositionPacket()
     {
@@ -116,10 +116,10 @@ public class CompassSync : Sync
 
                 tk2dSprite newSprite = playerCompass.GetComponent<tk2dSprite>();
                 newSprite.color = new Color(1, 1, 1, ModConfig.CompassOpacity);
-                
+
                 PlayerCompasses[packet.ID] = playerCompass;
             }
-        
+
             playerCompass.SetActive(packet.Active);
             playerCompass.transform.localPosition = new Vector2(packet.PosX, packet.PosY);
         }

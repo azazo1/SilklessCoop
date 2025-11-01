@@ -64,7 +64,7 @@ internal class AudioSync : Sync
 
      * The HeroAudioController uses a RandomAudioClipTable for its footstep sounds
      * The RandomAudioClipTable is a list of sounds, when it's used it plays a random sound from that table with a random pitch and sometimes a random volume
-     * 
+     *
      * In order to play footstep sounds, team cherry used the built-in event system with TK2D, since you already synced animation, we can just see when an animation frame has the footstep sound event
      * If we combine this with syncing the current footstep table (RandomAudioClipTable controlling footsteps), then we only need to send the current footstep table whenever it changes and use the animation data for the rest
      */
@@ -216,7 +216,7 @@ internal class AudioSync : Sync
             foreach (string key in _playerAudioControllers.Keys)
             {
                 /*
-                
+
                 List of all animations that were used to find which footsteps sound to play
 
                 Run sounds:
@@ -245,7 +245,7 @@ internal class AudioSync : Sync
                 Dash animation (used to set "_playersDashing" variable)
 
                 Dash
-                
+
                  */
                 if (!PreFunc(key)) return;
                 // ReSharper disable once InconsistentNaming
@@ -695,7 +695,7 @@ internal class AudioSync : Sync
     public AudioClip deathImpactClip;
 
     frostedAudioLoop
-     * 
+     *
      */
 
     // ReSharper disable once MemberCanBePrivate.Global

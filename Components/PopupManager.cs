@@ -21,7 +21,7 @@ public class PopupManager : MonoBehaviour
     private void Update()
     {
         if (!_text) _text = GameObject.Find("_UIManager/UICanvas/MainMenuScreen/MainMenuButtons/OptionsButton/Menu Button Text");
-            
+
         while (_popups.Count > 0 && _popups.Peek().Time < Time.unscaledTime - ModConfig.PopupTimeout)
         {
             PopupEntry e = _popups.Dequeue();

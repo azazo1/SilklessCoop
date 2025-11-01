@@ -5,7 +5,7 @@ namespace SilklessCoopVisual.Components;
 public class SimpleInterpolator : MonoBehaviour
 {
     private Vector3 _velocity;
-    
+
     private tk2dSprite _sprite;
     private float _opacity = 1.0f;
 
@@ -13,7 +13,7 @@ public class SimpleInterpolator : MonoBehaviour
     {
         _sprite = GetComponent<tk2dSprite>();
     }
-    
+
     private void Update()
     {
         transform.position += _velocity * Time.deltaTime;
