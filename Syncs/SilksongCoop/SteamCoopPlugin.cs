@@ -20,16 +20,15 @@ using Steamworks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using Object = UnityEngine.Object;
 
 // ReSharper disable InconsistentNaming
 #nullable enable
 namespace SilklessCoopVisual.Syncs.SilksongCoop;
 
-[BepInPlugin("com.silksong.coop.steamcoop", "Silksong Coop Steam Plugin", "3.4.0")]
+[BepInPlugin("com.silksong.coop.steamcoop", "Silksong Coop Steam Plugin", "3.4.0")] // todo delete
 public class SteamCoopPlugin : BaseUnityPlugin
 {
-    internal static ManualLogSource Logger;
+
     private Callback<LobbyCreated_t> lobbyCreated;
     private Callback<LobbyEnter_t> lobbyEnter;
     private Callback<GameLobbyJoinRequested_t> lobbyJoinRequest;
@@ -67,6 +66,8 @@ public class SteamCoopPlugin : BaseUnityPlugin
     private int lobbyRetryCount = 0;
     private const int MaxLobbyRetries = 3;
 
+    public static ManualLogSource s_Logger;
+
     private static string CurrentSceneName
     {
         get
@@ -78,6 +79,7 @@ public class SteamCoopPlugin : BaseUnityPlugin
 
     private void Awake()
     {
+        s_Logger = Logger;
         if (!SteamAPI.Init())
         {
             Logger.LogError("Steam initialization failed.");
@@ -691,7 +693,7 @@ public class SteamCoopPlugin : BaseUnityPlugin
             {
                 scene = CurrentSceneName
             }
-        }, 0);
+        }, EP2PSend.k_EP2PSendUnreliable);
     }
 
     private void ApplyPartner(PlayerState s)
@@ -916,10 +918,10 @@ public class SteamCoopPlugin : BaseUnityPlugin
             {
                 type = "EnemyDelta",
                 payload = enemyDelta
-            }, 0, enemyDelta.scene);
+            }, EP2PSend.k_EP2PSendUnreliable, enemyDelta.scene);
     }
 
-    private static void BroadcastEnemyDelta(HealthManager hm)
+    private void BroadcastEnemyDelta(HealthManager hm)
     {
         var orAssignId = EnemyRegistry.GetOrAssignId(hm.gameObject);
         if (string.IsNullOrEmpty(orAssignId))
@@ -934,7 +936,7 @@ public class SteamCoopPlugin : BaseUnityPlugin
         p.payload = enemyDelta;
         Logger.LogInfo(
             $"[BroadcastEnemyDelta] Enemy {orAssignId} hp={enemyDelta.hp} dead={enemyDelta.dead} sent to peers in scene {enemyDelta.scene}");
-        SendToSceneMembers(p, 0, enemyDelta.scene);
+        SendToSceneMembers(p, EP2PSend.k_EP2PSendUnreliable, enemyDelta.scene);
     }
 
     private void OnLobbyCreated(LobbyCreated_t cb)

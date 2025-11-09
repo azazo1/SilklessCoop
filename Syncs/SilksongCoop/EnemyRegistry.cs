@@ -13,8 +13,8 @@ namespace SilklessCoopVisual.Syncs.SilksongCoop;
 
 public static class EnemyRegistry
 {
-    private static readonly Dictionary<string, GameObject> id2go = new Dictionary<string, GameObject>();
-    private static readonly Dictionary<GameObject, string> go2id = new Dictionary<GameObject, string>();
+    private static readonly Dictionary<string, GameObject> id2go = new();
+    private static readonly Dictionary<GameObject, string> go2id = new();
     private static float lastRescanTime = -10f;
 
     public static void RefreshAllIds()

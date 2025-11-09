@@ -22,10 +22,10 @@ public static class Patch_HealthManager_Hit
       return true;
     if (SteamCoopPlugin.IsHost())
     {
-      SteamCoopPlugin.Logger.LogInfo("You are Host");
+      SteamCoopPlugin.s_Logger.LogInfo("You are Host");
       return true;
     }
-    SteamCoopPlugin.Logger.LogInfo("Client Attack");
+    SteamCoopPlugin.s_Logger.LogInfo("Client Attack");
     var orAssignId = EnemyRegistry.GetOrAssignId(instance.gameObject);
     if (string.IsNullOrEmpty(orAssignId))
       return true;
@@ -86,7 +86,7 @@ public static class Patch_HealthManager_Hit
     var packet = new SteamCoopPlugin.Packet<SteamCoopPlugin.EnemyDelta>();
     packet.type = "EnemyDelta";
     packet.payload = enemyDelta1;
-    SteamCoopPlugin.Logger.LogInfo($"[Hit] Enemy {orAssignId} hp={enemyDelta1.hp} dead={enemyDelta1.dead} sent to peers in scene {enemyDelta1.scene}");
+    SteamCoopPlugin.s_Logger.LogInfo($"[Hit] Enemy {orAssignId} hp={enemyDelta1.hp} dead={enemyDelta1.dead} sent to peers in scene {enemyDelta1.scene}");
     var scene = enemyDelta1.scene;
     var bytes = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(packet));
     var numLobbyMembers = SteamMatchmaking.GetNumLobbyMembers(SteamCoopPlugin.CurrentLobby);

@@ -5,7 +5,6 @@
 // Assembly location: D:\Temp\Temp\sk\silksongcoop\SilksongCoop.dll
 
 using SilklessCoopVisual.Syncs.SilksongCoop;
-using SilksongCoop;
 using UnityEngine;
 
 #nullable enable
@@ -18,7 +17,7 @@ public static class EnemySync
         GameObject byId = EnemyRegistry.FindById(d.id, d.scene);
         if (byId == null)
         {
-            SteamCoopPlugin.Logger.LogWarning((object)$"[EnemySync] Enemy {d.id} still not found after refresh.");
+            SteamCoopPlugin.s_Logger.LogWarning((object)$"[EnemySync] Enemy {d.id} still not found after refresh.");
         }
         else
         {

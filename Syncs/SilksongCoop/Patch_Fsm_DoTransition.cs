@@ -53,6 +53,6 @@ public static class Patch_Fsm_DoTransition
             {
                 type = "EnemyFsm",
                 payload = enemyFsmState
-            }, (EP2PSend)2, name);
+            }, EP2PSend.k_EP2PSendReliable, name);
     }
 }
