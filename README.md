@@ -25,6 +25,8 @@ cp SilksongPath.props.example SilksongPath.props
 
 然后编辑其中的路径为丝之歌的游戏路径.
 
+[//]: # (todo: com.silksong.coop.harmony 代码中的, 改成合适的域名倒置)
+
 ## Screenshots / Videos
 
 <details>

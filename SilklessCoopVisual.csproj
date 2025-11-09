@@ -21,10 +21,15 @@
         <PackageReference Include="BepInEx.Analyzers" Version="1.*" PrivateAssets="all" />
         <PackageReference Include="BepInEx.Core" Version="5.*" />
         <PackageReference Include="BepInEx.PluginInfoProps" Version="2.*" />
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
         <PackageReference Include="UnityEngine.Modules" Version="6000.0.50" IncludeAssets="compile" />
     </ItemGroup>
 
     <ItemGroup>
+        <Reference Include="com.rlabrecque.steamworks.net">
+            <HintPath>$(SILKSONG_PATH)/Hollow Knight Silksong_Data/Managed/com.rlabrecque.steamworks.net.dll</HintPath>
+        </Reference>
+        
         <Reference Include="TeamCherry.TK2D">
             <HintPath>$(SILKSONG_PATH)/Hollow Knight Silksong_Data/Managed/TeamCherry.TK2D.dll</HintPath>
         </Reference>
